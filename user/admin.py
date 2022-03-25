@@ -2,12 +2,15 @@ from django.contrib.auth.admin import GroupAdmin as origin_GroupAdmin
 from django.contrib.auth.admin import UserAdmin as origin_UserAdmin
 from django.contrib.auth.models import Group as origin_Group
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import format_html_join
 from django.contrib import admin
+from itertools import groupby
 from . import models
 from . import forms
 
 
 class UserAdmin(origin_UserAdmin):
+    list_display = ('username', 'is_active', 'name', )
     fieldsets = [
         [None, {'fields': ['username', 'password',]}],
         [_('Personal info'), {'fields': ['name',]}],
@@ -17,6 +20,20 @@ class UserAdmin(origin_UserAdmin):
 
 
 class GroupAdmin(origin_GroupAdmin):
+    list_display = ('name', 'get_permissions', )
+
+    def get_permissions(self, obj):
+        dic = {'view': '查看', 'add': '新增', 'change': '修改', 'delete': '刪除'}
+        permissions = obj.permissions.order_by('content_type__app_label').all()
+        permissions = map(lambda obj: obj.name.split(' '), permissions)
+        permissions = map(lambda obj: (_(obj[2]), dic[obj[1]]), permissions)
+        permissions = (
+            (model, '、'.join([p[1] for p in ps]))
+            for model, ps in groupby(permissions, key=lambda p: p[0])
+        )
+        return format_html_join('', '<div>{}：{}</div>', permissions)
+    get_permissions.short_description = '群組權限'
+
     def has_delete_permission(self, request, obj=None):
         if request.user.is_superuser:
             return True
@@ -37,10 +54,16 @@ class GroupAdmin(origin_GroupAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
+
+        permissions = form.base_fields.get('permissions')
+        if permissions:
+            permissions.queryset = permissions.queryset.exclude(content_type__app_label__in=['admin', 'contenttypes', 'sessions'])
+            permissions.queryset = permissions.queryset.exclude(content_type__app_label='auth', content_type__model='group')
+            permissions.queryset = permissions.queryset.exclude(content_type__app_label='user', content_type__model='user')
+
         if request.user.is_superuser:
             return form
 
-        permissions = form.base_fields.get('permissions')
         if permissions:
             user_permissions = {p.id for p in request.user.user_permissions.all()}
             for group in request.user.groups.all():
@@ -54,6 +77,7 @@ class GroupAdmin(origin_GroupAdmin):
 class StaffAdmin(origin_UserAdmin):
     form = forms.UserChangeForm
     readonly_fields = ('last_login', 'date_joined', 'username',)
+    list_display = ('username', 'is_active', 'is_manager', 'is_superuser', )
     fieldsets = [
         [None, {'fields': ['username', 'password']}],
         [_('Permissions'), {'fields': ['is_active', 'is_manager', 'groups', 'user_permissions']}],
@@ -71,6 +95,12 @@ class StaffAdmin(origin_UserAdmin):
         form = super().get_form(request, obj, **kwargs)
         form.request = request
 
+        user_permissions = form.base_fields.get('user_permissions')
+        if user_permissions:
+            user_permissions.queryset = user_permissions.queryset.exclude(content_type__app_label__in=['admin', 'contenttypes', 'sessions'])
+            user_permissions.queryset = user_permissions.queryset.exclude(content_type__app_label='auth', content_type__model='group')
+            user_permissions.queryset = user_permissions.queryset.exclude(content_type__app_label='user', content_type__model='user')
+
         if request.user.is_superuser:
             return form
 
@@ -79,7 +109,6 @@ class StaffAdmin(origin_UserAdmin):
             groups_ids = [g.id for g in obj.groups.all()] + [g.id for g in request.user.groups.all()]
             groups.queryset = groups.queryset.filter(pk__in=groups_ids)
 
-        user_permissions = form.base_fields.get('user_permissions')
         if user_permissions:
             user_permissions_ids = [g.id for g in obj.user_permissions.all()] + [g.id for g in request.user.user_permissions.all()]
             user_permissions.queryset = user_permissions.queryset.filter(pk__in=user_permissions_ids)
