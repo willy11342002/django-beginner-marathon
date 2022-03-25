@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 17:07+0800\n"
+"POT-Creation-Date: 2022-03-17 10:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,21 +19,37 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: .\user\admin.py:11
+msgid "Personal info"
+msgstr "個人資料"
+
+#: .\user\admin.py:12 .\user\admin.py:20
+msgid "Permissions"
+msgstr "權限"
+
+#: .\user\admin.py:13 .\user\admin.py:21
+msgid "Important dates"
+msgstr "重要日期"
+
+#: .\user\admin.py:35
 msgid "Administrader System"
 msgstr "管理員系統"
 
-#: .\user\apps.py:8
+#: .\user\apps.py:8 .\user\models.py:43 .\user\models.py:44
 msgid "user"
 msgstr "使用者"
 
-#: .\user\models.py:9 .\user\models.py:10
+#: .\user\models.py:10 .\user\models.py:11
 msgid "group"
 msgstr "使用者群組"
 
-#: .\user\models.py:14
+#: .\user\models.py:27
 msgid "name"
 msgstr "使用者名稱"
 
-#: .\user\models.py:15
+#: .\user\models.py:28
 msgid "manager status"
 msgstr "管理員狀態"
+
+#: .\user\models.py:35 .\user\models.py:36
+msgid "staff"
+msgstr "工作人員"
