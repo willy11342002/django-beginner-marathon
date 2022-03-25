@@ -17,7 +17,7 @@ class UserAdmin(origin_UserAdmin):
 class StaffAdmin(origin_UserAdmin):
     fieldsets = [
         [None, {'fields': ['username', 'password']}],
-        [_('Permissions'), {'fields': ['is_active', 'is_manager', 'is_staff', 'groups', 'user_permissions']}],
+        [_('Permissions'), {'fields': ['is_active', 'is_manager', 'groups', 'user_permissions']}],
         [_('Important dates'), {'fields': ['last_login', 'date_joined']}],
     ]
 
