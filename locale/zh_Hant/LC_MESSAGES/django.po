@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-17 10:31+0800\n"
+"POT-Creation-Date: 2022-03-17 12:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "重要日期"
 msgid "Administrader System"
 msgstr "管理員系統"
 
-#: .\user\apps.py:8 .\user\models.py:43 .\user\models.py:44
+#: .\user\apps.py:8 .\user\models.py:46 .\user\models.py:47
 msgid "user"
 msgstr "使用者"
 
@@ -50,6 +50,10 @@ msgstr "使用者名稱"
 msgid "manager status"
 msgstr "管理員狀態"
 
-#: .\user\models.py:35 .\user\models.py:36
+#: .\user\models.py:31 .\user\models.py:32
+msgid "all user"
+msgstr "所有使用者"
+
+#: .\user\models.py:38 .\user\models.py:39
 msgid "staff"
 msgstr "工作人員"

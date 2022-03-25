@@ -27,6 +27,9 @@ class User(AbstractUser):
     name = models.CharField(_('name'), max_length=64, null=True, blank=True)
     is_manager = models.BooleanField(_('manager status'), default=False)
 
+    class Meta:
+        verbose_name = _('all user')
+        verbose_name_plural = _('all user')
 
 class StaffProxy(User):
     objects = StaffManager()
