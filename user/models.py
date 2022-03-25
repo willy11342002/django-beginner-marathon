@@ -5,7 +5,9 @@ from django.db import models
 
 
 class Group(origin_Group):
-    pass
+    class Meta:
+        verbose_name = _('group')
+        verbose_name_plural = _('group')
 
 
 class User(AbstractUser):

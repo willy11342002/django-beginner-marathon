@@ -4,18 +4,22 @@ import os
 # 測試站
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-# 語系、時區
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+
 # 使用者相關設定
 AUTH_USER_MODEL = 'user.User'
 AUTH_GROUP_MODEL = 'user.Group'
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 語系、時區
+LANGUAGE_CODE = 'zh-Hant'
+LANGUAGES = [('en', 'English'), ('zh-hant', 'Traditional Chinese'),]
+LOCALE_PATHS = (BASE_DIR / 'locale',)
+TIME_ZONE = 'Asia/Taipei'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 STATIC_URL = '/static/'
 ROOT_URLCONF = 'main.urls'
