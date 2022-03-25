@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "~\\Anaconda3\\envs\\myWeb\\python.exe",
+    "emmet.includeLanguages": {"django-html": "html"}
+}
