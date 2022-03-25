@@ -8,6 +8,8 @@ ALLOWED_HOSTS = ['*']
 # 使用者相關設定
 AUTH_USER_MODEL = 'user.User'
 AUTH_GROUP_MODEL = 'user.Group'
+LOGIN_REDIRECT_URL = '/user/'
+LOGOUT_REDIRECT_URL = '/user/'
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,7 +53,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
