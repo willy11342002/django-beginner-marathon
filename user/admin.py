@@ -3,20 +3,26 @@ from django.contrib.auth.admin import UserAdmin as origin_UserAdmin
 from django.contrib.auth.models import Group as origin_Group
 from django.utils.translation import gettext_lazy as _
 from django.utils.html import format_html_join
+from admin_plus.admin import ModelAdmin
 from django.contrib import admin
 from itertools import groupby
 from . import models
 from . import forms
 
 
-class UserAdmin(origin_UserAdmin):
-    list_display = ('username', 'is_active', 'name', )
+class UserAdmin(ModelAdmin, origin_UserAdmin):
+    list_display = ('username', 'name', 'email', 'is_active')
     fieldsets = [
         [None, {'fields': ['username', 'password',]}],
         [_('Personal info'), {'fields': ['name',]}],
         [_('Permissions'), {'fields': ['is_active',]}],
         [_('Important dates'), {'fields': ['last_login', 'date_joined']}],
     ]
+    search_fields = (
+        ('username', 'username'),
+        ('email', 'email'),
+        ('name', 'name'),
+    )
 
 
 class GroupAdmin(origin_GroupAdmin):

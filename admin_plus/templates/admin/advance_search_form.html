@@ -1,0 +1,74 @@
+{% load i18n static %}
+{% load getattribute %}
+{% load getitems %}
+
+{% if cl.search_fields %}
+<script>
+    function search_btn_click(event) {
+        if (document.body.clientWidth<768) {
+            return
+        }
+        input = document.getElementById(event.target.dataset.inputId);
+        if (input.style.display=='none') {
+            event.target.parentNode.classList.add('show')
+            input.style.display = ''
+        }
+        else {
+            event.target.parentNode.classList.remove('show')
+            input.style.display = 'none'
+        }
+    }
+    window.onload = () => {
+        if (document.body.clientWidth>=768) {
+            return
+        }
+        document.querySelectorAll('.input-field, .select-field').forEach(e => {
+            e.parentNode.classList.add('show')
+            e.style.display = ''
+        })
+    }
+</script>
+<div id="toolbar">
+    <form id="changelist-search" method="get">
+        <div id="search-bar">
+            {% for fieldname, field, value in cl.search_fields %}
+                <div class="search-obj {% if value %}show{% else %}{% endif %}">
+                    <span class="search-btn" onclick="search_btn_click(event)"
+                        data-input-id="search-{{field}}">{{ fieldname }}</span>
+                    {% if cl.chooser|getitems:field %}
+                    <select name="{{ field }}" class="select-field" id="search-{{field}}" style="{% if value %}{% else %}display:none;{% endif %}">
+                        <option value="">請選擇</option>
+                        {% for v, txt in cl.chooser|getitems:field %}
+                        <option value="{{ v }}" {% if value == v %}selected{% endif %}>{{ txt }}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input class="input-field" style="{% if value %}{% else %}display:none;{% endif %}" type="text" name="{{ field }}" value="{{ value }}" id="search-{{field}}" autofocus>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="search-obj show">
+                <span class="search-btn" data-input-id="search-joiner" onclick="search_btn_click(event)">交集/聯集</span>
+                <select name="joiner" class="select-field" id="search-joiner" title="若選擇【和】，各欄位使用交集方式篩選。若選擇【或】，各欄位使用聯集方式篩選">
+                    <option value="and_" {% if cl.joiner == 'and_' %}selected{% endif %}>交集</option>
+                    <option value="or_" {% if cl.joiner == 'or_' %}selected{% endif %}>聯集</option>
+                </select>
+            </div>
+            <div class="search-obj show">
+                <span class="search-btn" data-input-id="search-regex" onclick="search_btn_click(event)">正則表達式</span>
+                <select name="regex" class="select-field" id="search-regex" title="若選擇【是】，支援正則表達式篩選。若選擇【否】，不支援正則表達式篩選">
+                    <option value="" {% if cl.regex == '' %}selected{% endif %}>否</option>
+                    <option value="1" {% if cl.regex == '1' %}selected{% endif %}>是</option>
+                </select>
+            </div>
+            <input type="submit" value="{% translate 'Search' %}">
+            {% if show_result_count %}
+                <span class="small quiet" style="align-self: center;">{% blocktranslate count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktranslate %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}{% blocktranslate with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktranslate %}{% else %}{% translate "Show all" %}{% endif %}</a>)</span>
+            {% endif %}
+            {% for pair in cl.params.items %}
+                {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">{% endif %}
+            {% endfor %}
+        </div>
+    </form>
+</div>
+{% endif %}

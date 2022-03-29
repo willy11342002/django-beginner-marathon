@@ -1,0 +1,108 @@
+table input:not([type="checkbox"]) {
+    width: 80%;
+  }
+  
+  table thead th .text a {
+    padding: 5px;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #search-bar {
+      display: block !important;
+    }
+  }
+  
+  @media only screen and (min-width: 768px) {
+    #search-bar {
+      display: flex;
+      flex-wrap: wrap !important;
+    }
+  }
+  
+  #search-bar > * {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+  }
+  
+  #search-bar .search-obj:not(.show) .search-btn {
+    border-radius: 5px;
+  }
+  
+  #search-bar .search-obj {
+    display: flex;
+    height: 1.5rem;
+  }
+  
+  #search-bar .search-obj .search-btn {
+    background-color: var(--default-button-bg);
+    color: var(--button-fg);
+    border-radius: 5px 0px 0px 5px;
+    padding: 0px 10px;
+    cursor: pointer;
+    align-self: center;
+    text-align: center;
+    box-sizing: border-box;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #search-bar .search-obj .search-btn {
+      min-width: 35%;
+    }
+  }
+  
+  #search-bar .search-obj .input-field {
+    border-radius: 0px 5px 5px 0px;
+    border: solid 1px var(--header-bg);
+    background-color: var(--body-bg);
+    color: var(--header-link-color);
+    padding: 3px;
+    align-self: center;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 0px;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #search-bar .search-obj .input-field {
+      width: 65%;
+    }
+  }
+  
+  #search-bar .search-obj .select-field {
+    border-radius: 0px 5px 5px 0px;
+    border: solid 1px var(--header-bg);
+    background-color: var(--body-bg);
+    color: var(--header-link-color);
+    padding: 0px 5px;
+    align-self: center;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 0px;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    #search-bar .search-obj .select-field {
+      width: 65%;
+    }
+  }
+  
+  #search-bar #search-joiner {
+    margin-bottom: 0px;
+  }
+  
+  #toolbar #changelist-search #search-bar input[type="submit"] {
+    background-color: var(--default-button-bg) !important;
+    color: var(--button-fg) !important;
+    border-radius: 5px;
+    padding-left: 5px !important;
+  }
+  
