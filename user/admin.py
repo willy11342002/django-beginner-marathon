@@ -19,9 +19,9 @@ class UserAdmin(ModelAdmin, origin_UserAdmin):
         [_('Important dates'), {'fields': ['last_login', 'date_joined']}],
     ]
     search_fields = (
-        ('username', 'username'),
-        ('email', 'email'),
-        ('name', 'name'),
+        (_('username'), 'username'),
+        (_('email'), 'email'),
+        (_('name'), 'name'),
     )
 
 

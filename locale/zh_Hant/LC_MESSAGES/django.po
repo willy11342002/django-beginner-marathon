@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-17 12:08+0800\n"
+"POT-Creation-Date: 2022-03-29 14:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\user\admin.py:11
+#: .\admin_plus\templates\admin\advance_change_list.html:32
+msgid "Home"
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_change_list.html:52
+msgid "Please correct the error below."
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_change_list.html:52
+msgid "Please correct the errors below."
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_change_list.html:84
+msgid "Filter"
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_change_list.html:86
+msgid "Clear all filters"
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_search_form.html:64
+msgid "Search"
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_search_form.html:66
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] ""
+
+#: .\admin_plus\templates\admin\advance_search_form.html:66
+#, python-format
+msgid "%(full_result_count)s total"
+msgstr ""
+
+#: .\admin_plus\templates\admin\advance_search_form.html:66
+msgid "Show all"
+msgstr ""
+
+#: .\user\admin.py:17
 msgid "Personal info"
 msgstr "個人資料"
 
-#: .\user\admin.py:12 .\user\admin.py:20
+#: .\user\admin.py:18 .\user\admin.py:89
 msgid "Permissions"
 msgstr "權限"
 
-#: .\user\admin.py:13 .\user\admin.py:21
+#: .\user\admin.py:19 .\user\admin.py:90
 msgid "Important dates"
 msgstr "重要日期"
 
-#: .\user\admin.py:35
+#: .\user\admin.py:22
+msgid "username"
+msgstr "會員帳號"
+
+#: .\user\admin.py:23
+msgid "email"
+msgstr "會員信箱"
+
+#: .\user\admin.py:24 .\user\models.py:27
+msgid "name"
+msgstr "會員名稱"
+
+#: .\user\admin.py:135
 msgid "Administrader System"
 msgstr "管理員系統"
 
@@ -41,10 +92,6 @@ msgstr "使用者"
 #: .\user\models.py:10 .\user\models.py:11
 msgid "group"
 msgstr "使用者群組"
-
-#: .\user\models.py:27
-msgid "name"
-msgstr "使用者名稱"
 
 #: .\user\models.py:28
 msgid "manager status"
