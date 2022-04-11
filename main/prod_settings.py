@@ -1,8 +1,7 @@
 from pathlib import Path
 import os
 
-# 測試站
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # 使用者相關設定
